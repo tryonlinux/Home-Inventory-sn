@@ -1,2 +1,2 @@
 # Home-Inventory-sn
-An extension editor for Standard Notes to catalog home inventory in a solid and security way 
+An extension editor for Standard Notes to catalog home inventory in a solid and secure way 
