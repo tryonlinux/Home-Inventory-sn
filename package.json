@@ -1,0 +1,57 @@
+{
+  "name": "home-inventory-sn",
+  "version": "1.0.7",
+  "main": "dist/dist.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.prod.js",
+    "start": "webpack serve --config webpack.dev.js --progress --hot",
+    "lint": "eslint app/ --ext .js",
+    "lint:fix": "yarn lint --fix"
+  },
+  "sn": {
+    "main": "dist/index.html"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/eslint-parser": "^7.14.3",
+    "@babel/plugin-proposal-class-properties": "^7.13.0",
+    "@babel/plugin-transform-runtime": "^7.14.3",
+    "@babel/preset-env": "^7.14.2",
+    "@babel/preset-react": "^7.13.13",
+    "@standardnotes/component-relay": "2.0.3",
+    "@standardnotes/eslint-config-extensions": "^1.0.4",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^5.2.5",
+    "eslint": "^7.26.0",
+    "eslint-plugin-react": "^7.23.2",
+    "html-webpack-plugin": "^5.3.1",
+    "immutability-helper": "^3.0.1",
+    "jsqr": "^1.4.0",
+    "mini-css-extract-plugin": "^1.6.0",
+    "node-sass": "^4.12.0",
+    "notp": "^2.0.3",
+    "otplib": "^11.0.1",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "regenerator-runtime": "^0.13.2",
+    "sass-loader": "^11.1.1",
+    "sn-editor-kit": "1.0.9",
+    "sn-stylekit": "2.0.15",
+    "style-loader": "~0.13.1",
+    "terser-webpack-plugin": "^5.1.2",
+    "webpack": "^5.37.1",
+    "webpack-cli": "^4.7.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^5.7.3"
+  },
+  "dependencies": {
+    "@primer/octicons-react": "^13.0.0",
+    "bootstrap": "^4.6.0",
+    "match-sorter": "^6.3.0",
+    "react-bootstrap": "^1.6.0",
+    "react-table": "^7.7.0",
+    "uuid": "^8.3.2"
+  }
+}
