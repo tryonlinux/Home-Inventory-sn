@@ -8,20 +8,8 @@ import React, { Component } from 'react';
 class InventoryList extends Component {
   constructor(props) {
     super(props);
-    this.state = { inventory: this.props.inventory };
     this.cellFunction = this.cellFunction.bind(this);
-    this.deleteInventoryItem = this.deleteInventoryItem.bind(this);
     this.viewEditPictures = this.viewEditPictures.bind(this);
-  }
-  //TODO delete method call save method, maybe move up to top
-  deleteInventoryItem(id) {
-    this.setState((prevState) => {
-      let newInventory = [...prevState.inventory];
-      let index = newInventory.findIndex((x) => x.id === id);
-      newInventory.splice(index, 1);
-      this.props.handleSaveInventory(newInventory);
-      return { inventory: newInventory };
-    });
   }
 
   viewEditPictures(id) {
@@ -125,12 +113,12 @@ class InventoryList extends Component {
 
   //returns a custom cell that houses our actions
   cellFunction({ cell }) {
-    if (this.state.inventory.length) {
+    if (this.props.inventory.length) {
       return (
         <ActionsCell
           cell={cell}
-          inventory={this.state.inventory}
-          handleDelete={this.deleteInventoryItem}
+          inventory={this.props.inventory}
+          handleDelete={this.props.deleteInventory}
           handleViewEdit={this.props.updateInventory}
           handleViewEditPictures={this.viewEditPictures}
         ></ActionsCell>
@@ -193,10 +181,10 @@ class InventoryList extends Component {
         ],
       },
     ];
-    return !this.state.inventory.length ? (
+    return !this.props.inventory.length ? (
       <div>Please Click plus button to add Inventory</div>
     ) : (
-      <Table columns={columns} data={this.state.inventory} />
+      <Table columns={columns} data={this.props.inventory} />
     );
   }
 }
@@ -207,4 +195,5 @@ InventoryList.propTypes = {
   inventory: PropTypes.array,
   handleSaveInventory: PropTypes.func,
   updateInventory: PropTypes.func,
+  deleteInventory: PropTypes.func,
 };
