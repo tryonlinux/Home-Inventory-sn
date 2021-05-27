@@ -50,7 +50,6 @@ class InventoryItem extends Component {
       [name]: value,
     });
   }
-  //TODO fix the location not being selected on load of an edit item
   render() {
     return (
       <div>
@@ -86,7 +85,9 @@ class InventoryItem extends Component {
                 >
                   <option key={-1}> </option>
                   {this.props.locations.map((row) => (
-                    <option key={row}>{row}</option>
+                    <option key={row} value={row}>
+                      {row}
+                    </option>
                   ))}
                 </Form.Control>
               </Form.Group>
