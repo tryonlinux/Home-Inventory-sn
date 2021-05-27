@@ -40,13 +40,15 @@ export default class Home extends React.Component {
     this.updateInventory = this.updateInventory.bind(this);
     this.saveInventory = this.saveInventory.bind(this);
     this.displayEditForm = this.displayEditForm.bind(this);
+    this.deleteInventoryItem = this.deleteInventoryItem.bind(this);
+    this.onAddInventory = this.onAddInventory.bind(this);
     //TODO add form for adding new locations
-    //TODO Fix it not properly loading when switching between notes'
   }
 
   configureEditorKit = () => {
     let delegate = new EditorKitDelegate({
       setEditorRawText: (text) => {
+        this.setState({ ...initialState });
         let parseError = false;
         let entries = [];
         if (text) {
@@ -56,6 +58,7 @@ export default class Home extends React.Component {
             // Couldn't parse the content
             parseError = true;
             this.setState({
+              loaded: true,
               parseError: true,
             });
           }
@@ -65,35 +68,21 @@ export default class Home extends React.Component {
           entries[0].data.inventory &&
           entries[0].data.inventory.length > 0
         ) {
-          this.setState(
-            {
-              loaded: true,
-              addInventory: false,
-              editInventory: false,
-              //  text,
-              data: {
-                inventory: entries[0].data.inventory,
-                locations: entries[0].data.locations,
-              },
-              // entries,
+          this.setState({
+            loaded: true,
+            addInventory: false,
+            editInventory: false,
+            data: {
+              inventory: entries[0].data.inventory,
+              locations: entries[0].data.locations,
             },
-            () => {
-              console.log(JSON.stringify(this.state));
-            }
-          );
+          });
         } else {
-          alert('Empty');
-          this.setState(
-            {
-              // text,
-              // entries,
-              addInventory: false,
-              editInventory: false,
-            },
-            () => {
-              console.log(JSON.stringify(this.state));
-            }
-          );
+          this.setState({
+            loaded: true,
+            addInventory: false,
+            editInventory: false,
+          });
         }
       },
       clearUndoHistory: () => {},
@@ -166,7 +155,7 @@ export default class Home extends React.Component {
       purchasedAmount: purchasedAmount,
       purchasedDate: purchasedDate,
       estimatedValue: estimatedValue,
-      note: notes,
+      notes: notes,
       filesafePictures: filesafePictures,
     });
     this.setState({ data, addInventory: false });
@@ -209,8 +198,26 @@ export default class Home extends React.Component {
     });
   }
 
+  deleteInventoryItem(id) {
+    this.setState(
+      (prevState) => {
+        let data = { ...prevState.data };
+        let index = data.inventory.findIndex((x) => x.id === id);
+        let inventory = data.inventory
+          .slice(0, index)
+          .concat(data.inventory.slice(index + 1));
+        data = { ...data, inventory };
+        return {
+          data,
+          addInventory: false,
+          editInventory: false,
+        };
+      },
+      () => this.saveInventory()
+    );
+  }
+
   render() {
-    alert(this.state.loaded);
     return (
       <div className="sn-component">
         <div>
@@ -260,6 +267,7 @@ export default class Home extends React.Component {
             ) : (
               <InventoryList
                 inventory={this.state.data.inventory}
+                deleteInventory={this.deleteInventoryItem}
                 handleSaveInventory={this.saveInventory}
                 updateInventory={this.displayEditForm}
               />
