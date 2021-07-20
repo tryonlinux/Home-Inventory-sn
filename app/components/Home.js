@@ -236,7 +236,7 @@ export default class Home extends React.Component {
   deleteLocation(location) {
     let newLocations = this.state.data.locations;
     const index = newLocations.indexOf(location);
-    if (index > -1) {
+    if (index > -1 && location !== '' && location !== undefined) {
       newLocations.splice(index, 1);
       let newData = this.state.data;
       newData.locations = newLocations;

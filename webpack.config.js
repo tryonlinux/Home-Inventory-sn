@@ -62,7 +62,7 @@ module.exports = {
       filename: 'dist.css',
     }),
     new HtmlWebpackPlugin({
-      title: 'blank-editor-template-sn',
+      title: 'home-inventory-sn',
       template: 'editor.index.ejs',
       filename: 'index.html',
     }),
