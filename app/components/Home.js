@@ -6,14 +6,15 @@ import Col from 'react-bootstrap/Col';
 import InventoryList from './InventoryList';
 import InventoryItem from './InventoryItem';
 import JSONToCSVConvertor from '../lib/JSONToCSV';
-import { PlusCircleIcon } from '@primer/octicons-react';
+import { PlusCircleIcon, GearIcon } from '@primer/octicons-react';
+import Settings from './Settings';
 
 const initialState = {
   loaded: false,
-  parseError: false,
   addInventory: false,
   editInventory: false,
   editID: '',
+  displaySettings: false,
   data: {
     inventory: [],
     locations: [],
@@ -24,12 +25,13 @@ export default class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = initialState;
-    this.state.data.locations = [
-      'Master Bedroom',
-      'Bathroom',
-      'Kitchen',
-      'Living Room',
-    ];
+    //test data
+    // this.state.data.locations = [
+    //   'Master Bedroom',
+    //   'Bathroom',
+    //   'Kitchen',
+    //   'Living Room',
+    // ];
 
     this.configureEditorKit();
 
@@ -42,24 +44,23 @@ export default class Home extends React.Component {
     this.displayEditForm = this.displayEditForm.bind(this);
     this.deleteInventoryItem = this.deleteInventoryItem.bind(this);
     this.onAddInventory = this.onAddInventory.bind(this);
-    //TODO add form for adding new locations
+    this.addNewLocation = this.addNewLocation.bind(this);
+    this.deleteLocation = this.deleteLocation.bind(this);
+    this.toggleSettings = this.toggleSettings.bind(this);
   }
 
   configureEditorKit = () => {
     let delegate = new EditorKitDelegate({
       setEditorRawText: (text) => {
         this.setState({ ...initialState });
-        let parseError = false;
         let entries = [];
         if (text) {
           try {
             entries = JSON.parse(text);
           } catch (e) {
             // Couldn't parse the content
-            parseError = true;
             this.setState({
               loaded: true,
-              parseError: true,
             });
           }
         }
@@ -216,7 +217,41 @@ export default class Home extends React.Component {
       () => this.saveInventory()
     );
   }
-
+  addNewLocation(location) {
+    if (location === '' || location === undefined) {
+      alert('Connect add blank location!');
+    } else {
+      if (!this.state.data.locations.includes(location)) {
+        let newLocations = this.state.data.locations.concat(location);
+        let newData = this.state.data;
+        newData.locations = newLocations;
+        this.setState({ data: newData }, () => {
+          this.saveInventory();
+        });
+      } else {
+        alert('Location already exists!');
+      }
+    }
+  }
+  deleteLocation(location) {
+    let newLocations = this.state.data.locations;
+    const index = newLocations.indexOf(location);
+    if (index > -1) {
+      newLocations.splice(index, 1);
+      let newData = this.state.data;
+      newData.locations = newLocations;
+      this.setState({ data: newData }, () => {
+        this.saveInventory();
+      });
+    } else {
+      alert('Error Deleting location!');
+    }
+  }
+  toggleSettings() {
+    this.setState({
+      displaySettings: !this.state.displaySettings,
+    });
+  }
   render() {
     return (
       <div className="sn-component">
@@ -244,10 +279,22 @@ export default class Home extends React.Component {
                 Export
               </Button>
             </Col>
+            <Col>
+              <Button onClick={this.toggleSettings} variant="success">
+                <GearIcon size={16} />
+              </Button>
+            </Col>
           </Row>
         </div>
         <div id="content">
-          {this.state.loaded ? (
+          {this.state.displaySettings ? (
+            <Settings
+              addNewLocation={this.addNewLocation}
+              deleteLocation={this.deleteLocation}
+              locations={this.state.data.locations}
+              toggleSettings={this.toggleSettings}
+            />
+          ) : this.state.loaded ? (
             this.state.addInventory ? (
               <InventoryItem
                 locations={this.state.data.locations}

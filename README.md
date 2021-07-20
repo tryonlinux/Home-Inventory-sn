@@ -9,7 +9,6 @@ An extension editor for [Standard Notes ](https://standardnotes.org)to catalog h
 ## To-Do
 
 - [ ] Publish to listed.to
-- [ ] Build a way to edit locations
 - [ ] Add ability to add pictures (filesafe)
 - [ ] Add ability to view pictures
 - [ ] Add ability to delete pictures
