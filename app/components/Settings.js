@@ -42,6 +42,7 @@ class Settings extends Component {
                   onChange={this.handleInputChange}
                   value={this.state.settingSelected}
                 >
+                  <option key={-1}> </option>
                   {this.props.locations.map((row) => (
                     <option key={row} value={row}>
                       {row}
