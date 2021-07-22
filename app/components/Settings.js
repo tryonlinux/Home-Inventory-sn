@@ -23,9 +23,11 @@ class Settings extends Component {
   }
   deleteLocation() {
     this.props.deleteLocation(this.state.settingSelected);
-    this.setState({
-      settingSelected: this.props.locations[this.state.locations][0],
-    });
+    if (this.props.locations !== undefined && this.props.locations.length > 0) {
+      this.setState({
+        settingSelected: this.props.locations[0],
+      });
+    }
   }
   addNewLocation() {
     this.props.addNewLocation(this.state.addValue);
@@ -34,9 +36,11 @@ class Settings extends Component {
     });
   }
   componentDidMount() {
-    this.setState({
-      settingSelected: this.props.locations[this.state.locations][0],
-    });
+    if (this.props.locations !== undefined && this.props.locations.length > 0) {
+      this.setState({
+        settingSelected: this.props.locations[0],
+      });
+    }
   }
   render() {
     return (
