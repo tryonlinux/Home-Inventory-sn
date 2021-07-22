@@ -1,6 +1,6 @@
 {
   "name": "home-inventory-sn",
-  "version": "1.0.7",
+  "version": "1.0.0",
   "main": "dist/dist.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
