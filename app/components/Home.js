@@ -52,7 +52,6 @@ export default class Home extends React.Component {
   configureEditorKit = () => {
     let delegate = new EditorKitDelegate({
       setEditorRawText: (text) => {
-        this.setState({ ...initialState });
         let entries = [];
         if (text) {
           try {
