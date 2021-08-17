@@ -5,6 +5,10 @@ An extension editor for [Standard Notes ](https://standardnotes.org)to catalog h
 ## Demo
 ![](https://github.com/tryonlinux/Home-Inventory-sn/blob/0e3ba5e2eef79cc8f781e2adc1079f32c9a33395/Home%20Inventory.gif)
 
+## Support
+
+[Buy me a Coffee](https://www.buymeacoffee.com/tryomas)
+
 ## Install
 
 - link to listed published url be posted later
