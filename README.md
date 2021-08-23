@@ -11,11 +11,10 @@ An extension editor for [Standard Notes ](https://standardnotes.org)to catalog h
 
 ## Install
 
-- link to listed published url be posted later
+Install Link: https://listed.to/p/zrC2z2Ry68
 
 ## To-Do
 
-- [ ] Publish to listed.to
 - [ ] Add ability to add pictures (filesafe)
 - [ ] Add ability to view pictures
 - [ ] Add ability to delete pictures
