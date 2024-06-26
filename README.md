@@ -1,4 +1,4 @@
-# Home-Inventory-sn
+# Home-Inventory-sn -- Archived, feel free to fork and self-host 
 
 An extension editor for [Standard Notes ](https://standardnotes.org)to catalog home inventory (great for insurance purposes) in a solid and secure way.
 
